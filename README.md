@@ -108,7 +108,9 @@ Options
 
     {
       # removes all namespace information from the node names
-      stripNamespaces: true
+      stripNamespaces: true,
+      # Ignore node name casing
+      ignoreNodeNameCasing: true,
     }
 
     
