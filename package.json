@@ -21,8 +21,5 @@
   "devDependencies": {
     "mocha": "~1.4.2",
     "coffee-script": "1.6.x"
-  },
-  "engines": {
-    "node": "0.8.x"
   }
 }
