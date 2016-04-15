@@ -46,7 +46,7 @@ exports.parse = (readStream, options = {}) ->
       return if not currentNode?
 
       if (currentNode.$name is nodeName) or options.ignoreNodeNameCasing and
-         (currentNode.$name is nodeName.toLowerCase() or currentNode.$name is nodeName.toUpperCase()
+         (currentNode.$name is nodeName.toLowerCase() or currentNode.$name is nodeName.toUpperCase())
 
         if currentNode.$parent
           throw new Error "Top-level node should not have a parent. Possible memory leak"
