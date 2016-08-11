@@ -117,7 +117,7 @@ describe "xml streamer thing", ->
 
     stream = streamData xml
 
-    parser = parse stream {ignoreNodeNameCasing: true}
+    parser = parse stream, {ignoreNodeNameCasing: true}
     parser.each 'item', (item) ->
       found.push item
 
