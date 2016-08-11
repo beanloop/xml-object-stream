@@ -48,7 +48,10 @@
         if (options.stripNamespaces) {
           name = stripNamespace(name);
         }
-        if ((name === nodeName || currentNode) || options.ignoreNodeNameCasing && (name === nodeName.toLowerCase() || name === nodeName.toUpperCase())) {
+        if (options.ignoreNodeNameCasing) {
+          name = name.toLowerCase();
+        }
+        if (name === nodeName || currentNode) {
           return currentNode = {
             $name: name,
             $: attrs,
@@ -70,7 +73,10 @@
         if (currentNode == null) {
           return;
         }
-        if ((currentNode.$name === nodeName) || options.ignoreNodeNameCasing && (currentNode.$name === nodeName.toLowerCase() || currentNode.$name === nodeName.toUpperCase())) {
+        if (options.ignoreNodeNameCasing) {
+          name = name.toLowerCase();
+        }
+        if (currentNode.$name === nodeName) {
           if (currentNode.$parent) {
             throw new Error("Top-level node should not have a parent. Possible memory leak");
           }
@@ -107,3 +113,7 @@
   };
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=index.map
+*/

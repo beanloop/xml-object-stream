@@ -76,6 +76,56 @@ describe "xml streamer thing", ->
       done()
 
 
+  it 'should not ignore casing', (done) ->
+    found = []
+
+    xml = """
+    <root>
+      <Items>
+        <item name="1"/>
+        <Item name="2"/>
+        <ITEM name="3"/>
+        <itEM name="4"/>
+      </Items>
+    </root>
+    """
+
+    stream = streamData xml
+
+    parser = parse stream
+    parser.each 'item', (item) ->
+      found.push item
+
+    parser.on 'end', ->
+      assert.equal found.length, 1
+      done()
+
+
+  it 'should make all names lowercase', (done) ->
+    found = []
+
+    xml = """
+    <root>
+      <Items>
+        <item name="1"/>
+        <Item name="2"/>
+        <ITEM name="3"/>
+        <itEM name="4"/>
+      </Items>
+    </root>
+    """
+
+    stream = streamData xml
+
+    parser = parse stream {ignoreNodeNameCasing: true}
+    parser.each 'item', (item) ->
+      found.push item
+
+    parser.on 'end', ->
+      assert.equal found.length, 4
+      done()
+
+
   describe 'namespaces', ->
     it 'should strip namespaces by default', (done) ->
       stream = streamData """

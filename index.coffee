@@ -30,8 +30,8 @@ exports.parse = (readStream, options = {}) ->
 
     parser.on 'startElement', (name, attrs) ->
       if options.stripNamespaces then name = stripNamespace name
-      if (name is nodeName or currentNode) or options.ignoreNodeNameCasing and
-         (name is nodeName.toLowerCase() or name is nodeName.toUpperCase())
+      if options.ignoreNodeNameCasing then name = name.toLowerCase()
+      if (name is nodeName or currentNode)
         currentNode = {$name: name, $:attrs, $parent: currentNode}
 
     parser.on 'text', (text) ->
@@ -45,9 +45,8 @@ exports.parse = (readStream, options = {}) ->
     parser.on 'endElement', (name) ->
       return if not currentNode?
 
-      if (currentNode.$name is nodeName) or options.ignoreNodeNameCasing and
-         (currentNode.$name is nodeName.toLowerCase() or currentNode.$name is nodeName.toUpperCase())
-
+      if options.ignoreNodeNameCasing then name = name.toLowerCase()
+      if (currentNode.$name is nodeName)
         if currentNode.$parent
           throw new Error "Top-level node should not have a parent. Possible memory leak"
 
