@@ -16,7 +16,7 @@
     "build:coffee": "coffee -c index.coffee"
   },
   "dependencies": {
-    "node-expat": "^2.3.12"
+    "node-expat": "^2.3.11"
   },
   "devDependencies": {
     "mocha": "~1.4.2",
